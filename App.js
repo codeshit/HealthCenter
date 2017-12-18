@@ -22,7 +22,7 @@ const store = configStore();
 const RouteView = StackNavigator({
   Main: { screen: Main },
   Doctor: { screen: Doctor },
-  Doctored: { screen: Doctored },
+ Doctored: { screen: Doctored },
   Doctoring: { screen: Doctoring },
 })
 

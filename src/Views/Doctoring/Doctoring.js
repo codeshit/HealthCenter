@@ -11,6 +11,16 @@ class Doctoring extends Component {
         header: null
     }
 
+    constructor(){
+        super();
+        this.explain = raw => {
+            return {
+                ...raw,
+                doing: true
+            }
+        }
+    }
+
     get data() {
         return {
             messages: [
@@ -29,7 +39,7 @@ class Doctoring extends Component {
                     title: "申请中的医嘱"
                 })}
                 <Content>
-                     <Box messages={this.data.messages} done={true} doing={true} />
+                     <Box messages={this.data.messages} explain={this.explain} />
                 </Content>
             </Container>
         )

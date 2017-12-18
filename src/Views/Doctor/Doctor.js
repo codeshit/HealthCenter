@@ -1,10 +1,13 @@
 import React from 'react';
 import Component from '../../utils/BaseComponent';
-import { View } from 'react-native';
+import { View, ListView } from 'react-native';
 import { Container, Content, Text, Right, Icon, Left, Button, Footer, FooterTab } from 'native-base';
 import R2Factory from '../../utils/R2Factory';
 import style from './style.css';
 import { EasyTitle } from '../../utils/widget';
+
+const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 });
+
 
 function TagTitle({ name = "", value = "", color = style.tagtitle_blue, iStyle = { marginBottom: 0 } }) {
     return (
@@ -15,38 +18,39 @@ function TagTitle({ name = "", value = "", color = style.tagtitle_blue, iStyle =
     )
 }
 
-function Tag(props) {
-    const { time = "Time", value = "医嘱内容", done = false, doing = false } = props;
+function Tag(raw) {
+    let data = null;
+    if(!this || !this.dictionary){
+        data = { ...raw };
+    }else{
+        data = this.dictionary(raw);
+    }
+
+    const { time = "Time", value = "医嘱内容", doing = false, done = false } = data;
     return (
         <View>
-            <TagTitle value={time} color={done? style.tagtitle_blue : style.tagtitle_yellow} />
+            <TagTitle value={time} color={done ? style.tagtitle_blue : style.tagtitle_yellow} />
             <View style={style.tag}>
                 <Left style={style.tag_left}>
-                    <Text style={style.tag_text}>{doing?`申请说明：${value}`:value}</Text>
+                    <Text style={style.tag_text}>{doing ? `申请说明：${value}` : value}</Text>
                 </Left>
                 <Right style={style.tag_right}>
-                    {done ? null : (
+                    {done || doing ? null : (
                         <Button transparent >
-                        <Icon style={style.tag_check} name="checkmark-circle" />
-                    </Button>
-                )}
+                            <Icon style={style.tag_check} name="checkmark-circle" />
+                        </Button>
+                    )}
                 </Right>
-        </View>
+            </View>
         </View >
     )
 }
 
-export function Box({ messages = [], done = false, doing = false }) {
-    const views = [];
-    messages.forEach((value, index) => {
-        const view = (<Tag time={value.time} key={index} value={value.value} done={done} doing={doing} />)
-        views.push(view);
-    })
-
-    const outputview = views.length > 0 ?
+export function Box({ messages = [], explain }) {
+    const outputview = messages.length > 0 ?
         (<View style={style.box}>
             <View style={style.box_line} />
-            {views}
+            <ListView dataSource={dataSource.cloneWithRows(messages)} renderRow={Tag.bind({dictionary: explain})} />
             <TagTitle />
         </View>) : <EasyTitle title="没有查询到您的医嘱" />;
 
@@ -56,6 +60,13 @@ export function Box({ messages = [], done = false, doing = false }) {
 class Doctor extends Component {
     static navigationOptions = {
         header: null
+    }
+
+    constructor(){
+        super();
+        this.explain = raw => {
+            return raw;
+        }
     }
 
     get data() {
@@ -69,22 +80,23 @@ class Doctor extends Component {
         }
     }
 
-    doctored(e){
+    doctored(e) {
         this.goto("Doctored")
     }
 
-    doctoring(e){
-         this.goto("Doctoring")
+    doctoring(e) {
+        this.goto("Doctoring")
     }
 
     render() {
+
         return (
             <Container>
                 {this.createHeader({
                     title: "医嘱管理"
                 })}
                 <Content>
-                    <Box messages={this.data.messages} />
+                    <Box messages={this.data.messages} explain={this.explain} />
                 </Content>
                 <Footer>
                     <FooterTab>

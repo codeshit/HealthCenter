@@ -10,10 +10,8 @@ import { EasyTitle } from '../../utils/widget';
 
 function LoadMore() {
     return (
-        <View>
-            <Button vertical>
-                <Text>点击加载更多</Text>
-            </Button>
+        <View style={style.loadmore}>
+            <Text style={style.loadmore_text}>点击加载更多</Text>
         </View>
     )
 }
@@ -23,21 +21,30 @@ class Doctored extends Component {
         header: null
     }
 
+    constructor() {
+        super();
+        this.explain = raw => {
+            return {
+                ...raw,
+                done: true
+            }
+        }
+    }
 
     get data() {
         return {
             messages: [
                 {
                     time: "2017.01.01 PM 12:30",
-                    value: "必须每日吃药，直到死亡来临。"
+                    value: "必须每日吃药，直到死亡来临。",
                 },
                 {
                     time: "2017.01.01 PM 12:30",
-                    value: "必须每日吃药，直到死亡来临。"
+                    value: "必须每日吃药，直到死亡来临。",
                 },
                 {
                     time: "2017.01.01 PM 12:30",
-                    value: "必须每日吃药，直到死亡来临。"
+                    value: "必须每日吃药，直到死亡来临。",
                 },
                 {
                     time: "2017.01.01 PM 12:30",
@@ -82,7 +89,7 @@ class Doctored extends Component {
                     title: "已完成医嘱"
                 })}
                 <Content>
-                    <Box messages={this.data.messages} done={true} />
+                    <Box messages={this.data.messages} explain={this.explain} />
                     {loadMore}
                 </Content>
             </Container>
