@@ -20,9 +20,9 @@ function TagTitle({ name = "", value = "", color = style.tagtitle_blue, iStyle =
 
 function Tag(raw) {
     let data = null;
-    if(!this || !this.dictionary){
+    if (!this || !this.dictionary) {
         data = { ...raw };
-    }else{
+    } else {
         data = this.dictionary(raw);
     }
 
@@ -50,7 +50,7 @@ export function Box({ messages = [], explain }) {
     const outputview = messages.length > 0 ?
         (<View style={style.box}>
             <View style={style.box_line} />
-            <ListView dataSource={dataSource.cloneWithRows(messages)} renderRow={Tag.bind({dictionary: explain})} />
+            <ListView dataSource={dataSource.cloneWithRows(messages)} renderRow={Tag.bind({ dictionary: explain })} />
             <TagTitle />
         </View>) : <EasyTitle title="没有查询到您的医嘱" />;
 
@@ -62,7 +62,7 @@ class Doctor extends Component {
         header: null
     }
 
-    constructor(){
+    constructor() {
         super();
         this.explain = raw => {
             return raw;
@@ -88,6 +88,10 @@ class Doctor extends Component {
         this.goto("Doctoring")
     }
 
+    apply(e) {
+        this.goto("Apply")
+    }
+
     render() {
 
         return (
@@ -108,7 +112,7 @@ class Doctor extends Component {
                             <Icon name="people" />
                             <Text>等待中</Text>
                         </Button>
-                        <Button vertical active>
+                        <Button vertical active onPress={this.apply.bind(this)}>
                             <Icon active name="send" />
                             <Text>申请医嘱</Text>
                         </Button>

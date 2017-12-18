@@ -45,6 +45,7 @@ const rawJSON = {
         }
     },
     tag:{
+        minHeight: 50,
         marginBottom: 20,
         paddingLeft: 40,
         paddingRight: 20,

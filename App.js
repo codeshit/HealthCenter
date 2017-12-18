@@ -13,17 +13,24 @@ import configStore from './src/redux/reducer';
 import { StackNavigator } from 'react-navigation';
 
 import Main from './src/Views/Main';
+
 import Doctor from './src/Views/Doctor';
 import Doctored from './src/Views/Doctored';
 import Doctoring from './src/Views/Doctoring';
+import Apply from './src/Views/Apply';
+
+import DataCenter from './src/Views/DataCenter';
 
 const store = configStore();
 
 const RouteView = StackNavigator({
+
   Main: { screen: Main },
   Doctor: { screen: Doctor },
- Doctored: { screen: Doctored },
+  Doctored: { screen: Doctored },
   Doctoring: { screen: Doctoring },
+  Apply: { screen: Apply },
+  DataCenter: { screen: DataCenter },
 })
 
 export default class App extends Component {

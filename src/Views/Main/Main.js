@@ -37,8 +37,8 @@ class Main extends Component {
                 })}
                 <Content>
                     <View style={style.content_view_row}>
-                        <Card onPress={e=>{this.goto("Doctor")}} icon="heart" title="医嘱管理" color="red" />
-                        <Card icon="list-box" title="医疗数据" color="rgb(165, 159, 67)" />
+                        <Card onPress={e=>{this.goto("Doctor")}} icon="heart" title="医嘱管理" color="rgb(253,60,45)" />
+                        <Card onPress={e=>{this.goto("DataCenter")}} icon="list-box" title="医疗数据" color="rgb(76,218,100)" />
                     </View>
                     <View style={style.content_view_row}>
                         <Card icon="time" title="我的提醒" color="rgb(0,162,232)" />

@@ -6,6 +6,10 @@ import R2Factory from '../../utils/R2Factory';
 import style from './style.css';
 
 class Demo extends Component {
+    static navigationOptions = {
+        header: null
+    }
+
     render() {
         return (
             <Container>
