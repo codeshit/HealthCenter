@@ -26,7 +26,7 @@ class DataCenter extends Component {
                                 <Text>我的病例</Text>
                             </Body>
                         </ListItem>
-                        <ListItem icon>
+                        <ListItem icon onPress={e=>this.goto("BloodSugar")}>
                             <Left>
                                 <Icon style={style.list_icon3} name="md-water" />
                             </Left>
@@ -37,7 +37,7 @@ class DataCenter extends Component {
 
                     </List>
                     <List style={style.list} >
-                        <ListItem icon>
+                        <ListItem icon onPress={e=>this.goto("Medication")}>
                             <Left>
                                 <Icon style={style.list_icon2} name="md-medical" />
                             </Left>
@@ -45,7 +45,7 @@ class DataCenter extends Component {
                                 <Text>我的用药</Text>
                             </Body>
                         </ListItem>
-                        <ListItem icon>
+                        <ListItem icon onPress={e=>this.goto("BloodPressure")}>
                             <Left>
                                 <Icon style={style.list_icon3} name="md-list" />
                             </Left>
