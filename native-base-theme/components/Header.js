@@ -309,6 +309,5 @@ export default (variables = variable) => {
     left: 0,
     right: 0,
   };
-
   return headerTheme;
 };

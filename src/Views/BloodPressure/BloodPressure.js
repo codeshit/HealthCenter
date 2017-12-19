@@ -1,6 +1,6 @@
 import React from 'react';
 import Component from '../../utils/BaseComponent';
-import { View, ListView, Image, DatePickerAndroid, TextInput } from 'react-native';
+import { View, ListView, Image, DatePickerAndroid, TouchableHighlight } from 'react-native';
 import { Container, Content, Text, Badge, Drawer, Button, Form, Item, Input, Label, Title, Card, CardItem, Body } from 'native-base';
 import R2Factory from '../../utils/R2Factory';
 import style from './style.css';
@@ -86,7 +86,7 @@ async function openPicker(date, reSuc) {
     }
 }
 
-function Updata({ dataTitle, type, data, dateAction, messageAction, updataAction, placeholder }) {
+function Updata({ openCamera, dataTitle, type, data, dateAction, messageAction, updataAction, placeholder }) {
 
     let keyboardType;
     switch (type) {
@@ -102,7 +102,7 @@ function Updata({ dataTitle, type, data, dateAction, messageAction, updataAction
     for (let i = 0; i < dataTitle.length; i += 1) {
         const item = (
             <Item key={i}>
-                <Input multiline={true} keyboardType={dataTitle[i].keyboardType || keyboardType} onChangeText={text => messageAction(text, i)} value={data.message[i]} placeholder={dataTitle[i].placeholder || placeholder} />
+                <Input multiline={true} keyboardType={dataTitle[i].keyboardType || keyboardType} onChangeText={text => messageAction(text, i)} value={data.message[i]} placeholder={dataTitle[i].placeholder || `请填写${placeholder}数据`} />
             </Item>
         )
         items.push(item);
@@ -120,6 +120,16 @@ function Updata({ dataTitle, type, data, dateAction, messageAction, updataAction
                     </Button>
                 </Item>
                 {items}
+                {
+                    !openCamera ? null : (
+                        <TouchableHighlight underlayColor={'rgba(0,0,255,.2)'} onPress={openCamera}>
+                            <View style={style.updata_view}>
+                                <Image style={style.updata_camera} source={data.avatarSource || require('../../../res/image/camera.png')} />
+                                <Text>拍摄{placeholder}</Text>
+                            </View>
+                        </TouchableHighlight>
+                    )
+                }
                 <Button rounded onPress={updataAction} danger style={style.updata_submit}>
                     <Title>提交数据</Title>
                 </Button>
@@ -163,8 +173,11 @@ export class BaseView extends Component {
         return [null]
     }
 
-    openCamera() {
+    get hasCamera() {
+        return false
+    }
 
+    openCamera() {
         ImagePicker.launchCamera(options, (response) => {
             console.log('Response = ', response);
 
@@ -178,14 +191,11 @@ export class BaseView extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             }
             else {
-                let source = { uri: response.uri };
-
+                let source = { uri: response.uri, isStatic: true };
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    avatarSource: source
-                });
+                this.state.updata.avatarSource = source;
+                this.setState(Object.assign({}, this.state));
             }
         });
     }
@@ -193,7 +203,7 @@ export class BaseView extends Component {
     initUpdata() {
         this.setState(Object.assign({}, this.state, {
             updata: {
-                date: new moment(new Date()), message: []
+                date: new moment(new Date()), message: [], avatarSource: null
             }
         }))
     }
@@ -269,11 +279,12 @@ export class BaseView extends Component {
                 ref={(ref) => { this.drawer = ref; }}
                 content={(
                     <Updata
+                        openCamera={this.hasCamera ? this.openCamera.bind(this) : null}
                         dataTitle={this.dataTitle}
                         type={this.messageType}
                         updataAction={this.updataAction.bind(this)}
                         messageAction={this.messageAction.bind(this)}
-                        placeholder={`请填写${this.title}数据`}
+                        placeholder={this.title}
                         dateAction={this.dateAction.bind(this)}
                         data={this.state.updata} />
                 )}
@@ -331,6 +342,7 @@ class BloodPressure extends BaseView {
     get messageType() {
         return 1
     }
+
 }
 
 export default R2Factory.connect(BloodPressure, {});

@@ -16,6 +16,18 @@ const rawJSON = {
             height: 200,
             marginBottom: 30,
         },
+        view:{
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center"
+        },
+        camera:{
+            borderColor: "lightgray",
+            borderWidth: 1,
+            width: 110,
+            height:90,
+            margin: 10,
+        },
        submit:{
            width:"80%",
            margin:"10%",

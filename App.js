@@ -23,10 +23,13 @@ import DataCenter from './src/Views/DataCenter';
 import BloodPressure from './src/Views/BloodPressure';
 import BloodSugar from './src/Views/BloodSugar';
 import Medication from './src/Views/Medication';
+import MedHistory from './src/Views/MedHistory';
+
 const store = configStore();
 
 const RouteView = StackNavigator({
   Main: { screen: Main },
+  MedHistory: { screen: MedHistory },
   BloodPressure: { screen: BloodPressure },
   Doctor: { screen: Doctor },
   Doctored: { screen: Doctored },
@@ -34,7 +37,7 @@ const RouteView = StackNavigator({
   Apply: { screen: Apply },
   DataCenter: { screen: DataCenter },
   BloodSugar: { screen: BloodSugar },
-  Medication: {screen: Medication},
+  Medication: { screen: Medication },
 })
 
 export default class App extends Component {
