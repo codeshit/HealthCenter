@@ -42,7 +42,7 @@ class Main extends Component {
                     </View>
                     <View style={style.content_view_row}>
                         <Card icon="time" title="我的提醒" color="rgb(0,162,232)" />
-                        <Card icon="ios-settings" title="设置系统" color="rgb(1, 194, 194)" />
+                        <Card icon="ios-settings" title="设置系统" color="gray" />
                     </View>
                 </Content>
             </Container>

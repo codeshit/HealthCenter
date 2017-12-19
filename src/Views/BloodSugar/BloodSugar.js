@@ -6,6 +6,20 @@ import R2Factory from '../../utils/R2Factory';
 import style from './style.css';
 
 class BloodSugar extends BaseView {
+    constructor(){
+        super();
+        this.state.datas = [
+            {
+                date: new Date(),
+                data: 3.1
+            },
+            {
+                date: new Date(),
+                data: 7.2
+            },
+        ]
+    }
+
     get title() {
         return "血糖"
     }

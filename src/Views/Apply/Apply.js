@@ -7,7 +7,7 @@ import style from './style.css';
 import Color from '../../styles/color.css';
 
 
-export function Footton({onPress, title}) {
+export function Footton({ onPress, title }) {
     return (
         <Footer>
             <Button danger full style={style.foot_button} onPress={onPress}>
@@ -26,22 +26,16 @@ class Apply extends Component {
     constructor() {
         super();
         this.state = {
-            name: "UU妹",
+            name: "罗贯中",
             sex: 1,
-            message: ""
+            message: "",
+            age: "53"
         }
     }
 
-    set sex(type) {
-        this.setState(Object.assign({}, this.state, { sex: type }))
-    }
 
     set message(text) {
         this.setState(Object.assign({}, this.state, { text: text }))
-    }
-
-    set name(name) {
-        this.setState(Object.assign({}, this.state, { name: name }))
     }
 
     push() {
@@ -59,16 +53,20 @@ class Apply extends Component {
                     <Form>
                         <Item>
                             <Label>姓名:</Label>
-                            <Input onChangeText={text => { this.name = text }} placeholder="请输入您的姓名" value={this.state.name} />
+                            <Input disabled placeholder="请输入您的姓名" value={this.state.name} />
                         </Item>
-                        <ListItem>
+                         <Item>
+                            <Label>年龄:</Label>
+                            <Input disabled placeholder="请输入您的姓名" value={this.state.age} />
+                        </Item>
+                        <ListItem last>
                             <Text>男</Text>
                             <InputGroup>
-                                <CheckBox checked={sex} onPress={e => { this.sex = 0 }} />
+                                <CheckBox disabled checked={sex} />
                             </InputGroup>
                             <Text>女</Text>
                             <InputGroup>
-                                <CheckBox checked={!sex} onPress={e => { this.sex = 1 }} />
+                                <CheckBox disabled checked={!sex} />
                             </InputGroup>
                         </ListItem>
                         <Item stackedLabel>
@@ -77,7 +75,7 @@ class Apply extends Component {
                         </Item>
                     </Form>
                 </Content>
-                <Footton onPress={this.push.bind(this)} title="提交申请"/>
+                <Footton onPress={this.push.bind(this)} title="提交申请" />
             </Container>
         )
     }
