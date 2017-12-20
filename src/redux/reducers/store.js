@@ -1,7 +1,11 @@
 import Type from "../actions/store";
 function initState() {
   return {
-   
+    user:{
+      name: "王尼玛",
+      age: "20",
+      sex: 1
+    }
   };
 }
 

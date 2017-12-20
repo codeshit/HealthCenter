@@ -14,14 +14,20 @@ class Setting extends Component {
     constructor() {
         super();
         this.state = {
-            username: "王尼玛",
-            age: "39",
-            sex: "女"
+            username: null,
+            age: null,
+            sex: null
         }
     }
 
+    componentWillMount() {
+        const { user } = this.store;
+        this.state.username = user.name;
+        this.state.age = user.age;
+        this.state.sex = user.sex == 1 ? "女" : "男";
+    }
+
     aboutUs() {
-  
         Toast.show({
             text: '欢迎使用健康平台!',
             position: 'bottom',

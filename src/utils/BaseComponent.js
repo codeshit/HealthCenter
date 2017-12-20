@@ -7,6 +7,13 @@ export default class BaseComponent extends Component {
         return navigate(where, data);
     }
 
+    get store(){
+        const { baseState = {} } = this.props;
+        const { store = {} } = baseState;
+        if(!store) return {};
+        return store;
+    }
+
     goBack(key) {
         if (typeof key == "string") {
             this.props.navigation.goBack(key);

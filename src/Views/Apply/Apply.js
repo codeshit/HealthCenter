@@ -26,11 +26,18 @@ class Apply extends Component {
     constructor() {
         super();
         this.state = {
-            name: "罗贯中",
-            sex: 1,
+            name: null,
+            sex: null,
             message: "",
-            age: "53"
+            age: null
         }
+    }
+
+    componentWillMount() {
+        const { user } = this.store;
+        this.state.name = user.name;
+        this.state.age = user.age;
+        this.state.sex = user.sex;
     }
 
 
@@ -55,7 +62,7 @@ class Apply extends Component {
                             <Label>姓名:</Label>
                             <Input disabled placeholder="请输入您的姓名" value={this.state.name} />
                         </Item>
-                         <Item>
+                        <Item>
                             <Label>年龄:</Label>
                             <Input disabled placeholder="请输入您的姓名" value={this.state.age} />
                         </Item>
