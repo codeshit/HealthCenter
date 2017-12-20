@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
 import Color from '../../styles/color.css';
-import {Font} from '../../styles/base.css';
+import { Font } from '../../styles/base.css';
 import { proCSS } from '../../utils/widget';
 
 
 const rawJSON = {
     content: {
+        paddingTop: 40,
         view: {
             row: {
                 flexDirection: "row"
@@ -13,13 +14,18 @@ const rawJSON = {
         }
     },
     card: {
-        marginTop: 60,
-        paddingBottom: 10,
-        alignItems: "center",
+        padding: 10,
         width: "50%",
-        text:{
+        text: {
             color: Color.dark,
             fontSize: Font.h1
+        },
+        view: {
+            borderRadius: 10,
+            backgroundColor: "white",
+            alignItems: "center",
+            width: "100%",
+            padding: 20,
         }
     }
 }
