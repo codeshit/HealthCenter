@@ -14,7 +14,11 @@ export default class BaseComponent extends Component {
     }
 
     createHeader(props = {}) {
-        const { title = 'Title', leftPress = this.goBack, leftBtn = "ios-arrow-back" } = props;
+        let { title = 'Title', leftPress = this.goBack, leftBtn = "ios-arrow-back" } = props;
+
+        if(typeof props == 'string')
+            title = props;
+        
         return (
             <Header>
                 <Left style={baseStyles.flexAround}>

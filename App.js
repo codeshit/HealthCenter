@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { StyleProvider } from 'native-base';
+import { StyleProvider, Root } from 'native-base';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 import { Provider } from 'react-redux';
@@ -24,6 +24,7 @@ import BloodPressure from './src/Views/BloodPressure';
 import BloodSugar from './src/Views/BloodSugar';
 import Medication from './src/Views/Medication';
 import MedHistory from './src/Views/MedHistory';
+import Setting from './src/Views/Setting'
 
 const store = configStore();
 
@@ -38,6 +39,7 @@ const RouteView = StackNavigator({
   DataCenter: { screen: DataCenter },
   BloodSugar: { screen: BloodSugar },
   Medication: { screen: Medication },
+  Setting: { screen: Setting },
 })
 
 export default class App extends Component {
@@ -45,7 +47,9 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <StyleProvider style={getTheme(material)}>
-          <RouteView />
+          <Root>
+            <RouteView />
+          </Root>
         </StyleProvider>
       </Provider>
     );

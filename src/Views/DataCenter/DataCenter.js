@@ -34,7 +34,6 @@ class DataCenter extends Component {
                                 <Text>血糖信息</Text>
                             </Body>
                         </ListItem>
-
                     </List>
                     <List style={style.list} >
                         <ListItem icon onPress={e => this.goto("Medication")}>
