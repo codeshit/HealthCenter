@@ -25,10 +25,14 @@ import BloodSugar from './src/Views/BloodSugar';
 import Medication from './src/Views/Medication';
 import MedHistory from './src/Views/MedHistory';
 import Setting from './src/Views/Setting'
+import Login from './src/Views/Login'
+import Register from './src/Views/Register'
 
 const store = configStore();
 
 const RouteView = StackNavigator({
+  Login:{screen:Login},
+  Register:{screen:Register},
   Main: { screen: Main },
   MedHistory: { screen: MedHistory },
   BloodPressure: { screen: BloodPressure },
