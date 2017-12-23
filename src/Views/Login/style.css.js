@@ -4,8 +4,10 @@ import baseStyle from '../../styles/base.css';
 import { proCSS } from '../../utils/widget';
 import { Font } from '../../styles/base.css';
 const rawJSON = {
-    container: {
+    
+    container: {        
         margin: 50,
+        marginTop:125, 
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
@@ -27,14 +29,13 @@ const rawJSON = {
         },
         textinput: {
             marginTop: 20,
-            width: '90%',
-            height: 50,
-            borderColor: 'skyblue',
-            borderWidth: 1,
-            borderRadius: 20,
+            width:'90%'
         },
         hightMargin:{
             marginTop: 40
+        },
+        icon:{
+            color:"#113140"
         }
     }
 }

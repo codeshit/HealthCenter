@@ -4,7 +4,10 @@ import baseStyle from '../../styles/base.css';
 import {proCSS} from '../../utils/widget';
 import {Font} from '../../styles/base.css';
 const rawJSON = {
-    
+    content:{
+        paddingTop:25
+        
+    }
    
 }
 
